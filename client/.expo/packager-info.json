@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://jb-zt6.atarah.client.exp.direct",
-  "packagerNgrokUrl": "https://packager.jb-zt6.atarah.client.exp.direct",
-  "ngrokPid": 77793
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
