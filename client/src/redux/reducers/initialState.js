@@ -8,5 +8,12 @@ export default {
     signup: false,
     isLoading: false,
     error: null
+  },
+  todoReducer: {
+    isFetching: false,
+    isDeleting: false,
+    isCreating: false,
+    todos: [],
+    error: null
   }
 }
