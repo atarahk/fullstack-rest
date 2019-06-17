@@ -2,6 +2,10 @@
 Backend: Node.js + MongoDB Atlas<br />
 Frontend: React Native + Redux
 <br /><br />
+Test Account: <br />
+username: eni08308@bcaoo.com<br />
+password: eni08308@bcaoo.com
+<br /><br />
 <b>Review the project: </b><br /><br />
 <img src="https://github.com/atarahk/fullstack-rest/blob/master/client/assets/fspreview.gif?raw=true" alt="fullstack-rest" width="400">
 <br /><br />
