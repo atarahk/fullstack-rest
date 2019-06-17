@@ -1,6 +1,6 @@
 ## Fullstack-rest
 Backend: Node.js + MongoDB Atlas<br />
-Frontend: React Native + Redux
+Frontend: React Native + Redux + Expo
 <br /><br />
 Test Account: <br />
 username: eni08308@bcaoo.com<br />
