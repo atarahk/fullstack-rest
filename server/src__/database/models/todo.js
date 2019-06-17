@@ -9,10 +9,6 @@ const TodoSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  createDate: {
-    type: Date,
-    required: true
-  },
   isDone: Boolean
 })
 const Todo = mongoose.model('Todo', TodoSchema)

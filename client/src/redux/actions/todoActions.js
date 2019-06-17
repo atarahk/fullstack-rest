@@ -1,4 +1,4 @@
-import { SecureStore } from 'expo'
+import * as SecureStore from 'expo-secure-store'
 import * as ActionTypes from '../actionTypes'
 import API from '../axiosConfig'
 
@@ -29,6 +29,22 @@ export const add_todo_success = newItem => ({
 
 export const add_todo_failure = error => ({
   type: ActionTypes.ADD_TODO_FAILURE,
+  error
+})
+
+export const edit_todo_item = () => ({
+  type: ActionTypes.EDIT_TODO_ITEM,
+  isLoading: true
+})
+
+export const edit_todo_success = (updatedItem, id) => ({
+  type: ActionTypes.EDIT_TODO_SUCCESS,
+  updatedItem,
+  id
+})
+
+export const edit_todo_failure = error => ({
+  type: ActionTypes.EDIT_TODO_FAILURE,
   error
 })
 
@@ -88,6 +104,32 @@ export const createTodo = (userId, text) => dispatch => {
         })
         .catch(error => {
           dispatch(add_todo_failure(error.response.data))
+        })
+    })
+    .catch(error => {
+      console.log('Error fetching secure credentials')
+    })
+}
+
+export const updateTodo = (userId, todoUpdate) => dispatch => {
+  console.log('todoActions => ', todoUpdate)
+  dispatch(edit_todo_item())
+  SecureStore.getItemAsync('userInfo')
+
+    .then(userdata => {
+      const userInfo = JSON.parse(userdata)
+      const { token } = userInfo
+      return API.patch(
+        `/users/${userId}/todos/${todoUpdate.id}`,
+
+        { text: todoUpdate.text, isDone: todoUpdate.isDone },
+        { headers: { authorization: token } }
+      )
+        .then(response => {
+          dispatch(edit_todo_success(response.data.todo, todoUpdate.id))
+        })
+        .catch(error => {
+          dispatch(edit_todo_failure(error.response.data))
         })
     })
     .catch(error => {

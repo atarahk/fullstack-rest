@@ -1,9 +1,6 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
-// const jwt = require('jsonwebtoken');
-// const dotenv = require('dotenv');
-
 dotenv.config()
 
 const secretKey = process.env.SECRET_KEY
@@ -28,13 +25,13 @@ const tokenizer = {
     if (!token) {
       return res.status(401).json({
         success: false,
-        message: 'No token found. Please Login or Signup'
+        message: 'No token found. Please Login'
       })
     }
     return jwt.verify(token, secretKey, (error, decoded) => {
       if (error) {
         return res.status(401).json({
-          message: 'Invalid Token, Please Login or Signup'
+          message: 'Invalid Token, Please Login'
         })
       }
       req.user = decoded

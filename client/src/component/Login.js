@@ -8,9 +8,9 @@ import {
   ToastAndroid,
   TouchableOpacity
 } from 'react-native'
-import { SecureStore } from 'expo'
-import { connect } from 'react-redux'
 import { CheckBox } from 'react-native-elements'
+import { connect } from 'react-redux'
+import * as SecureStore from 'expo-secure-store'
 import { register_page, loginUser } from '../redux/actions/authActions'
 import { add_alert } from '../redux/actions/alertActions'
 
