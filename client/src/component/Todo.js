@@ -7,43 +7,34 @@ import {
   StatusBar,
   Keyboard
 } from 'react-native'
-import Dimensions from 'Dimensions'
-import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { createTodo, fetchTodos } from '../redux/actions/todoActions'
-import { logoutUser } from '../redux/actions/authActions'
 import TodoList from './TodoList'
+
 import Icons from './Icons'
 import plusIcon from '../../assets/plus.png'
 
-const DEVICE_WIDTH = Dimensions.get('window').width
-
 class Todo extends Component {
   state = {
-    text: '',
-    isDone: false
+    text: ''
   }
 
   componentDidMount() {
     this.props.fetchTodos(this.props.userId)
   }
 
-  addTodo = (text, isDone) => {
+  addTodo = text => {
     if (text.length > 0) {
-      this.props.createTodo(this.props.userId, text, isDone)
+      this.props.createTodo(this.props.userId, text)
       Keyboard.dismiss()
     }
-  }
-
-  clearInput = () => {
-    this.setState({ text: '' })
   }
 
   render() {
     const renderList = () => {
       if (this.props.todos.length > 0) {
         return (
-          <View style={styles.containList}>
+          <View>
             <TodoList />
           </View>
         )
@@ -63,16 +54,6 @@ class Todo extends Component {
           <View style={styles.topbar}>
             <Text style={styles.title}>A ToDo App</Text>
           </View>
-          <View style={styles.logoutIcon}>
-            <Icon
-              name="sign-out"
-              type="font-awesome"
-              color="#fff"
-              size={30}
-              iconStyle={{ paddingLeft: 5, paddingTop: 10 }}
-              onPress={() => this.props.logoutUser()}
-            />
-          </View>
         </View>
 
         <View style={styles.containForm}>
@@ -83,7 +64,6 @@ class Todo extends Component {
               onChangeText={text => this.setState({ text })}
               onSubmitEditing={() => {
                 this.addTodo(this.state.text)
-                this.clearInput()
               }}
               value={this.state.text}
               style={styles.formInput}
@@ -93,7 +73,6 @@ class Todo extends Component {
           <Icons
             onPress={() => {
               this.addTodo(this.state.text)
-              this.clearInput()
             }}
             source={plusIcon}
             style={styles.plusButton}
@@ -140,11 +119,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 30,
     height: 50,
-    width: DEVICE_WIDTH - 70
-  },
-  containList: {
-    flex: 4,
-    backgroundColor: '#CBCECA'
+    width: 300
   },
   message: {
     flex: 4,
@@ -164,11 +139,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#49beb7'
   },
-  logoutIcon: {
-    flex: 2,
-    paddingTop: 50,
-    backgroundColor: '#49beb7'
-  },
   title: {
     color: 'white',
     fontSize: 20,
@@ -182,5 +152,5 @@ const styles = StyleSheet.create({
 
 export default connect(
   mapStateToProps,
-  { createTodo, logoutUser, fetchTodos }
+  { createTodo, fetchTodos }
 )(Todo)

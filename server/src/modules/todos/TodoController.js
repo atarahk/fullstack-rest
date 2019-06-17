@@ -1,4 +1,4 @@
-import Todo from '../../database/models/todo'
+const Todo = require('../../database/models/todo')
 
 class TodoController {
   static async fetchTodos(req, res) {
@@ -16,7 +16,7 @@ class TodoController {
       if (!todos.length) {
         return res.status(200).json({
           success: true,
-          message: 'Nothing found',
+          message: 'No items found',
           todos
         })
       }
@@ -32,21 +32,20 @@ class TodoController {
   static async createTodo(req, res) {
     const { userId } = req.params
     const { text, isDone } = req.body
-    const createDate = new Date()
-    const newTodo = { text, userId, isDone, createDate }
+    const newTodo = { text, userId, isDone }
 
     Todo.create(newTodo, (error, newItem) => {
       if (error) {
         return res.status(500).json({
           success: false,
-          message: 'Unable to create todo',
+          message: 'Unable to create todo items',
           error
         })
       }
 
       return res.status(201).json({
         success: true,
-        message: 'Successfuly created a todo',
+        message: 'Successfuly created a todo item',
         todo: newItem
       })
     })
@@ -61,7 +60,7 @@ class TodoController {
       if (error) {
         return res.status(500).json({
           success: false,
-          message: 'Unable to create todo',
+          message: 'Unable to create todo items',
           error
         })
       }
@@ -70,13 +69,13 @@ class TodoController {
         if (err) {
           return res.status(404).json({
             success: false,
-            message: 'Cannot find this todo',
+            message: 'Cannot find this todo item',
             error
           })
         }
         return res.status(200).json({
           success: true,
-          message: 'Successfuly updated a todo',
+          message: 'Successfuly updated a todo item',
           todo: updatedTodo
         })
       })
@@ -90,14 +89,14 @@ class TodoController {
       if (error) {
         return res.status(500).json({
           success: false,
-          message: 'Unable to delete todos',
+          message: 'Unable to delete todo items',
           error
         })
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Successfuly deleted a todo'
+        message: 'Successfuly deleted a todo item'
       })
     })
   }

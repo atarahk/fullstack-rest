@@ -31,7 +31,7 @@ class SignUp extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Do-It</Text>
+          <Text style={styles.title}>Let's Do It</Text>
         </View>
         <View style={styles.containLoginForm}>
           <View style={styles.field}>

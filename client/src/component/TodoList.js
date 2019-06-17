@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   FlatList,
-  Button,
   Text,
   View,
   Modal,
@@ -14,47 +13,17 @@ import {
 import * as Animatable from 'react-native-animatable'
 import Swipeout from 'react-native-swipeout'
 import { connect } from 'react-redux'
-import {
-  updateTodo,
-  deleteTodo,
-  fetchTodos
-} from '../redux/actions/todoActions'
+import { deleteTodo, fetchTodos } from '../redux/actions/todoActions'
 import { Loader } from './Loader'
 import Icons from './Icons'
 import updateIcon from '../../assets/update.png'
-import check from '../../assets/check.png'
-import uncheck from '../../assets/uncheck.png'
-
-import Dimensions from 'Dimensions'
-const DEVICE_WIDTH = Dimensions.get('window').width
 
 class TodoList extends Component {
   state = {
     showModal: false,
     itemTextToEdit: '',
     itemIdToEdit: '',
-    refreshing: false,
-    isDone: false
-  }
-
-  handleEditItem = ({ _id, text, isDone }) => {
-    this.setState({
-      itemTextToEdit: text,
-      itemIdToEdit: _id,
-      showModal: true,
-      isDone: isDone
-    })
-  }
-
-  editItem = () => {
-    const { itemIdToEdit, itemTextToEdit, isDone } = this.state
-    const updatedItem = {
-      id: itemIdToEdit,
-      text: itemTextToEdit,
-      isDone: isDone
-    }
-    this.props.updateTodo(this.props.userId, updatedItem)
-    this.clearState()
+    refreshing: false
   }
 
   onRefresh = () => {
@@ -73,24 +42,8 @@ class TodoList extends Component {
     })
   }
 
-  editTodo = () => {
-    const { itemIdToEdit, itemTextToEdit, isDone } = this.state
-    const updatedItem = {
-      id: itemIdToEdit,
-      text: itemTextToEdit,
-      isDone: !isDone
-    }
-    this.props.updateTodo(this.props.userId, updatedItem)
-    this.clearState()
-  }
-
   render() {
-    console.log('date props => ', this.props)
-
     const renderTodoItem = ({ item, index }) => {
-      const doneOrNot = item.isDone ? check : uncheck
-      const lineOrNot = item.isDone ? 'line-through' : 'none'
-
       const swipeButton = [
         {
           text: 'Delete',
@@ -102,16 +55,12 @@ class TodoList extends Component {
         {
           text: 'Edit',
           type: 'primary',
-          onPress: () => {
-            this.handleEditItem(item)
-          }
+          onPress: () => {}
         },
         {
           text: 'Mark',
           type: 'secondary',
-          onPress: () => {
-            this.handleEditItem(item)
-          }
+          onPress: () => {}
         }
       ]
 
@@ -122,19 +71,9 @@ class TodoList extends Component {
             duration={2000}
             style={styles.row}
           >
-            <Icons
-              source={doneOrNot}
-              style={styles.leftButton}
-              width={25}
-              height={25}
-            />
             <TouchableOpacity style={{ flex: 1 }}>
-              <Text
-                numberOfLines={1}
-                key={index}
-                style={{ textDecorationLine: `${lineOrNot}`, paddingLeft: 10 }}
-              >
-                {item.text}
+              <Text numberOfLines={1} key={index}>
+                {item.createDate}
               </Text>
             </TouchableOpacity>
           </Animatable.View>
@@ -183,20 +122,8 @@ class TodoList extends Component {
                     spellCheck={false}
                     style={styles.formInput}
                   />
-                  <Button
-                    onPress={() => {
-                      this.editTodo(this.state.isDone)
-                      this.toggleModal()
-                    }}
-                    title={
-                      this.state.isDone
-                        ? 'Click Me UnMark The Task'
-                        : 'Click Me Mark The Task'
-                    }
-                  />
                   <Icons
                     onPress={() => {
-                      this.editItem(this.state.itemTextToEdit)
                       this.toggleModal()
                     }}
                     source={updateIcon}
@@ -238,7 +165,7 @@ const styles = StyleSheet.create({
     color: '#49beb7',
     padding: 30,
     fontSize: 30,
-    width: DEVICE_WIDTH - 50
+    width: 300
   }
 })
 
@@ -251,5 +178,5 @@ const mapStateToProps = ({ todoReducer, authReducer }) => ({
 
 export default connect(
   mapStateToProps,
-  { updateTodo, deleteTodo, fetchTodos }
+  { deleteTodo, fetchTodos }
 )(TodoList)

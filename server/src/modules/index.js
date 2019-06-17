@@ -1,5 +1,5 @@
-import todoRouter from './todos'
-import userRouter from './user'
+const todoRouter = require('./todos')
+const userRouter = require('./user')
 
 const apiPrefix = '/api/'
 

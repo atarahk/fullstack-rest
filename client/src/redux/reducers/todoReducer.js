@@ -2,7 +2,6 @@ import * as ActionTypes from '../actionTypes'
 
 const initialState = {
   isFetching: false,
-  isUpdating: false,
   isDeleting: false,
   isCreating: false,
   todos: [],
@@ -29,20 +28,6 @@ const todoReducer = (state = initialState, action) => {
       }
     case ActionTypes.ADD_TODO_FAILURE:
       return { ...state, isCreating: false, error: action.error }
-
-    case ActionTypes.EDIT_TODO_ITEM:
-      return { ...state, isUpdating: true }
-    case ActionTypes.EDIT_TODO_SUCCESS:
-      return {
-        ...state,
-        isUpdating: false,
-        todos: state.todos.map(item =>
-          item._id === action.id ? action.updatedItem : item
-        ),
-        error: null
-      }
-    case ActionTypes.EDIT_TODO_FAILURE:
-      return { ...state, isUpdating: false, error: action.error }
 
     case ActionTypes.DELETE_TODO_ITEM:
       return { ...state, isDeleting: true }

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const TodoSchema = mongoose.Schema({
   text: {
@@ -7,10 +7,6 @@ const TodoSchema = mongoose.Schema({
   },
   userId: {
     type: String,
-    required: true
-  },
-  createDate: {
-    type: Date,
     required: true
   },
   isDone: Boolean
