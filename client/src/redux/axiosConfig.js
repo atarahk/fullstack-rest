@@ -6,4 +6,4 @@ export default axios.create({
   baseURL: api
 })
 
-// test account: eni08308@bcaoo.com
+// eni08308@bcaoo.com

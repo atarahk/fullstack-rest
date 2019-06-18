@@ -1,11 +1,11 @@
-import * as ActionTypes from '../actionTypes';
+import * as ActionTypes from '../actionTypes'
 
-export const add_alert = (message) => ({
+export const add_alert = message => ({
   type: ActionTypes.ADD_ALERT,
   message
-});
+})
 
-export const remove_alert = (messageId) => ({
+export const remove_alert = messageId => ({
   type: ActionTypes.REMOVE_ALERT,
   messageId
-});
+})

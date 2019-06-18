@@ -11,6 +11,7 @@ export default {
   },
   todoReducer: {
     isFetching: false,
+    isUpdating: false,
     isDeleting: false,
     isCreating: false,
     todos: [],
