@@ -1,7 +1,6 @@
-const express = require('express')
-const TodoController = require('./TodoController')
-const tokenizer = require('../../helpers/tokenizer')
-
+import express from 'express'
+import tokenizer from '../../helpers/tokenizer'
+import TodoController from './TodoController'
 const Router = express.Router()
 
 Router.get(

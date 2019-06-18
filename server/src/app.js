@@ -1,10 +1,10 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const logger = require('morgan')
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-const modules = require('./modules')
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import logger from 'morgan'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+import modules from './modules'
 
 dotenv.config()
 

@@ -1,4 +1,4 @@
-const Todo = require('../../database/models/todo')
+import Todo from '../../database/models/todo'
 
 class TodoController {
   static async fetchTodos(req, res) {

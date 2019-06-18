@@ -1,6 +1,6 @@
-const express = require('express')
-const middleware = require('../../middlewares/validators')
-const UserController = require('./UserController')
+import express from 'express'
+import middleware from '../../middlewares/validators'
+import UserController from './UserController'
 
 const Router = express.Router()
 

@@ -1,6 +1,5 @@
-const bcrypt = require('bcrypt')
-const User = require('../database/models/user')
-
+import bcrypt from 'bcrypt'
+import User from '../database/models/user'
 const invalidField = validationMessageArr => ({
   status: 400,
   error: validationMessageArr

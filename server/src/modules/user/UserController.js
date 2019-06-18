@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt')
-const User = require('../../database/models/user')
-const tokenizer = require('../../helpers/tokenizer')
+import bcrypt from 'bcrypt'
+import User from '../../database/models/user'
+import tokenizer from '../../helpers/tokenizer'
 
 class UserController {
   static async signUpUser(req, res) {
