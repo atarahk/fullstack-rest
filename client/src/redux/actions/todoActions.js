@@ -1,4 +1,4 @@
-import { SecureStore } from 'expo'
+import * as SecureStore from 'expo-secure-store'
 import * as ActionTypes from '../actionTypes'
 import API from '../axiosConfig'
 

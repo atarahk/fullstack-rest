@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { SecureStore } from 'expo'
+import * as SecureStore from 'expo-secure-store'
 import { register_page, loginUser } from '../redux/actions/authActions'
 import { add_alert } from '../redux/actions/alertActions'
 
