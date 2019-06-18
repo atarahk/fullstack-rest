@@ -29,12 +29,15 @@ import Dimensions from 'Dimensions'
 const DEVICE_WIDTH = Dimensions.get('window').width
 
 class TodoList extends Component {
-  state = {
-    showModal: false,
-    itemTextToEdit: '',
-    itemIdToEdit: '',
-    refreshing: false,
-    isDone: false
+  constructor(prpos) {
+    super(prpos)
+    this.state = {
+      showModal: false,
+      itemTextToEdit: '',
+      itemIdToEdit: '',
+      refreshing: false,
+      isDone: false
+    }
   }
 
   handleEditItem = ({ _id, text, isDone }) => {
@@ -84,9 +87,18 @@ class TodoList extends Component {
     this.clearState()
   }
 
-  render() {
-    console.log('date props => ', this.props)
+  toggleTodo = item => {
+    const todoUpdate = {
+      id: item._id,
+      text: item.text,
+      isDone: !item.isDone
+    }
+    console.log('todoUpdate => ', todoUpdate)
+    this.props.updateTodo(item.userId, todoUpdate)
+    this.clearState()
+  }
 
+  render() {
     const renderTodoItem = ({ item, index }) => {
       const doneOrNot = item.isDone ? check : uncheck
       const lineOrNot = item.isDone ? 'line-through' : 'none'
@@ -112,6 +124,9 @@ class TodoList extends Component {
           onPress: () => {
             this.handleEditItem(item)
           }
+          // onPress: () => {
+          //   this.toggleTodo(item)
+          // }
         }
       ]
 
@@ -127,12 +142,14 @@ class TodoList extends Component {
               style={styles.leftButton}
               width={25}
               height={25}
+              onPress={() => this.toggleTodo(item)}
             />
             <TouchableOpacity style={{ flex: 1 }}>
               <Text
                 numberOfLines={1}
                 key={index}
                 style={{ textDecorationLine: `${lineOrNot}`, paddingLeft: 10 }}
+                onPress={() => this.toggleTodo(item)}
               >
                 {item.text}
               </Text>

@@ -62,7 +62,6 @@ export const delete_todo_failure = error => ({
   type: ActionTypes.DELETE_TODO_FAILURE,
   error
 })
-
 // ActionCreators
 
 export const fetchTodos = userId => dispatch => {
@@ -113,7 +112,7 @@ export const createTodo = (userId, text) => dispatch => {
 }
 
 export const updateTodo = (userId, todoUpdate) => dispatch => {
-  console.log('todoActions => ', todoUpdate)
+  // console.log('todoActions => ', todoUpdate)
   dispatch(edit_todo_item())
   SecureStore.getItemAsync('userInfo')
 
