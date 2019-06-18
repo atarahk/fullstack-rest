@@ -21,18 +21,18 @@ app.use(
 )
 app.use(bodyParser.json())
 // connect to db
-if (process.env.NODE_ENV === 'production') {
-  mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })
-} else {
-  mongoose.connect('mongodb://localhost:27017/do-it', { useNewUrlParser: true })
-}
+// if (process.env.NODE_ENV === 'production') {
+//   mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true })
+// } else {
+//   mongoose.connect('mongodb://localhost:27017/do-it', { useNewUrlParser: true })
+// }
 // mongo connection only for quick test usage
-// mongoose.connect(
-//   'mongodb+srv://ata:ata@midmaytestgooglecloud-byzgf.gcp.mongodb.net/test?retryWrites=true',
-//   {
-//     useNewUrlParser: true
-//   }
-// )
+mongoose.connect(
+  'mongodb+srv://ata:ata@midmaytestgooglecloud-byzgf.gcp.mongodb.net/test?retryWrites=true',
+  {
+    useNewUrlParser: true
+  }
+)
 // set base url for api
 modules(app)
 
